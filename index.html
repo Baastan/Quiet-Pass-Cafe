@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тихий перевал — кофейня в Бишкеке</title>
+<meta name="description" content="Кофейня «Тихий перевал»: кофе, завтраки, горячее и десерты. Демонстрационный сайт.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f7f5; --fg:#0d2220; --card:#fff; --ice:#d6e9e4; --mute:#4f6b67; --line:#cfdcd8;
+  --spruce:#12312f; --spruce2:#1d4744; --spruce3:#2a5e5a; --butter:#f2c14e;
+  --dark-bg:#12312f; --dark-fg:#f4f7f5;
+}
+:root[data-theme="dark"]{
+  --bg:#0b1a19; --fg:#e6f0ed; --card:#12312f; --ice:#16393a; --mute:#9db8b3; --line:#26433f;
+  --dark-bg:#f2c14e; --dark-fg:#0d2220;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--fg);line-height:1.65;font-size:17px;transition:background .3s,color .3s}
+svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:'Unbounded','Onest',sans-serif;font-weight:600;line-height:1.18;letter-spacing:-.01em}
+.container{width:min(1120px,92%);margin-inline:auto}
+:focus-visible{outline:3px solid var(--butter);outline-offset:3px;border-radius:4px}
+
+/* Шапка */
+header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:18px;height:68px}
+.logo{font-family:'Unbounded',sans-serif;font-weight:600;text-decoration:none;margin-right:auto}
+.links{display:flex;gap:26px;list-style:none}
+.links a{text-decoration:none;font-weight:500;padding:6px 0;border-bottom:2px solid transparent;transition:border-color .2s}
+.links a:hover,.links a.active{border-color:var(--butter)}
+.icon-btn{position:relative;background:none;border:1px solid var(--line);color:var(--fg);border-radius:12px;padding:8px 13px;font:inherit;font-weight:500;cursor:pointer}
+.icon-btn:hover{background:var(--ice)}
+.badge{position:absolute;top:-8px;right:-8px;min-width:22px;height:22px;border-radius:11px;background:var(--butter);color:#0d2220;font-size:.78rem;font-weight:600;display:grid;place-items:center;padding:0 6px}
+.burger{display:none}
+
+/* Кнопки */
+.btn{display:inline-block;padding:14px 26px;border-radius:999px;font:inherit;font-weight:600;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .2s,background .2s,color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--butter);color:#0d2220}
+.btn-ghost{border-color:rgba(244,247,245,.55);color:#f4f7f5}
+.btn-ghost:hover{background:#f4f7f5;color:var(--spruce)}
+.btn-dark{background:var(--dark-bg);color:var(--dark-fg)}
+
+/* Главный экран */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--spruce),var(--spruce2));color:#f4f7f5;min-height:86vh;display:flex;align-items:center}
+.hero-inner{position:relative;z-index:3;padding:90px 0 200px;max-width:650px}
+.hero-note{color:#d6e9e4;font-weight:500;margin-bottom:18px}
+.hero h1{font-size:clamp(2rem,5.2vw,3.6rem);margin-bottom:22px}
+.lead{font-size:1.15rem;color:#d3e3df;max-width:520px;margin-bottom:34px}
+.actions{display:flex;gap:14px;flex-wrap:wrap}
+.sun{position:absolute;z-index:1;right:14%;bottom:26%;width:clamp(90px,14vw,170px);aspect-ratio:1;border-radius:50%;background:var(--butter);box-shadow:0 0 80px 20px rgba(242,193,78,.35);animation:rise 2.2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{transform:translateY(110px);opacity:0}to{transform:none;opacity:1}}
+.ridge{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:46%;z-index:2}
+
+/* Секции */
+.section{padding:84px 0}
+.section h2{font-size:clamp(1.5rem,3.2vw,2.2rem);margin-bottom:14px}
+.sub{color:var(--mute);max-width:560px;margin-bottom:34px}
+.alt{background:var(--ice)}
+
+/* Меню */
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.tab{font:inherit;font-weight:500;cursor:pointer;padding:10px 20px;border-radius:999px;border:1.5px solid var(--fg);background:transparent;color:var(--fg);transition:background .2s,color .2s}
+.tab:hover{background:var(--ice)}
+.tab[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}
+.dish{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:8px;transition:transform .2s,box-shadow .2s}
+.dish:hover{transform:translateY(-4px);box-shadow:0 14px 30px -18px rgba(13,34,32,.5)}
+.dish .emoji{font-size:2rem;line-height:1}
+.dish h3{font-size:1.05rem}
+.dish p{color:var(--mute);font-size:.95rem;flex:1}
+.dish .bottom{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+.price{font-weight:600}
+.add{font:inherit;font-weight:600;cursor:pointer;border:0;border-radius:999px;padding:9px 18px;background:var(--butter);color:#0d2220;transition:transform .15s}
+.add:active{transform:scale(.94)}
+
+/* Цифры */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.stat strong{display:block;font-family:'Unbounded',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:600;line-height:1.1}
+.stat span{color:var(--mute)}
+
+/* О нас */
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:64px;align-items:center}
+.split p+p{margin-top:16px}
+.art{background:var(--ice);border-radius:28px;padding:36px}
+.alt .art{background:var(--card)}
+
+/* Часы */
+.hours{list-style:none;max-width:460px}
+.hours li{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--line)}
+
+/* Формы */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+form{display:grid;gap:16px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{font-weight:500;display:grid;gap:6px}
+input,select,textarea{font:inherit;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--fg)}
+input:focus,select:focus,textarea:focus{outline:3px solid var(--butter);outline-offset:1px;border-color:var(--fg)}
+textarea{min-height:110px;resize:vertical}
+.msg{display:none;padding:14px 16px;border-radius:12px;background:var(--ice)}
+.msg.show{display:block}
+.hint{color:var(--mute);font-size:.92rem}
+.info{list-style:none}
+.info li{padding:15px 0;border-bottom:1px solid var(--line)}
+.info li:first-child{padding-top:0}
+.info strong{display:block;font-family:'Unbounded',sans-serif;font-weight:500;font-size:.95rem}
+
+/* Корзина */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .25s;z-index:80}
+.overlay.show{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--bg);z-index:90;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;box-shadow:-20px 0 40px -20px rgba(0,0,0,.4)}
+.drawer.open{transform:none}
+.drawer header{position:static;display:flex;justify-content:space-between;align-items:center;padding:18px 20px;backdrop-filter:none}
+.drawer h2{font-size:1.15rem}
+.items{flex:1;overflow:auto;padding:6px 20px}
+.item{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.item .qty{display:flex;align-items:center;gap:10px;grid-column:1/-1}
+.qty button{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);color:var(--fg);font:inherit;cursor:pointer}
+.empty{color:var(--mute);padding:30px 0;text-align:center}
+.foot{padding:18px 20px;border-top:1px solid var(--line);display:grid;gap:12px}
+.total{display:flex;justify-content:space-between;font-weight:600;font-size:1.1rem}
+
+footer.site{background:#0d2220;color:#c5d6d2;padding:50px 0 28px}
+footer.site .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:30px}
+footer.site h3{color:#f4f7f5;font-size:1rem;font-weight:500;margin-bottom:10px}
+footer.site ul{list-style:none}
+footer.site li{padding:3px 0}
+footer.site a{text-decoration:none}
+footer.site a:hover{color:var(--butter)}
+.demo{border-top:1px solid #28403c;padding-top:20px;font-size:.92rem;color:#8fa8a3}
+
+@media(max-width:860px){
+  .burger{display:block}
+  .links{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);border-bottom:1px solid var(--line);padding:6px 4%}
+  .links.open{display:flex}
+  .links a{display:block;padding:14px 0;border-bottom:1px solid var(--line)}
+  .hero{min-height:78vh}.hero-inner{padding:64px 0 170px}.sun{right:8%;bottom:30%}
+  .split,.two,footer.site .cols{grid-template-columns:1fr;gap:34px}
+  .stats{grid-template-columns:1fr 1fr}
+  .section{padding:60px 0}
+}
+@media(max-width:480px){.row2{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.sun{animation:none}html{scroll-behavior:auto}.btn,.dish,.drawer{transition:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="logo" href="#top">Тихий перевал</a>
+    <ul class="links" id="links">
+      <li><a href="#menu">Меню</a></li>
+      <li><a href="#about">О нас</a></li>
+      <li><a href="#booking">Бронь</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+    <button class="icon-btn" id="theme" aria-label="Переключить тему">🌙</button>
+    <button class="icon-btn" id="cart-open" aria-label="Открыть заказ">Заказ <span class="badge" id="count">0</span></button>
+    <button class="icon-btn burger" id="burger" aria-expanded="false" aria-controls="links">☰</button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="sun" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <p class="hero-note">Кофейня в Бишкеке, открыты каждый день с 8:00</p>
+        <h1>Первая чашка дня, как на вершине перевала</h1>
+        <p class="lead">Зерно обжариваем раз в неделю, завтраки подаём до 12:00, а из окна видно горы.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#menu">Смотреть меню</a>
+          <a class="btn btn-ghost" href="#booking">Забронировать стол</a>
+        </div>
+      </div>
+    </div>
+    <svg class="ridge" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+      <path style="fill:var(--spruce3)" d="M0 180 L140 90 L260 160 L420 40 L560 150 L700 70 L860 170 L1020 60 L1160 150 L1300 90 L1440 160 V300 H0Z"/>
+      <path style="fill:var(--bg)" d="M0 250 L180 170 L320 230 L520 140 L700 230 L900 160 L1080 235 L1260 170 L1440 240 V300 H0Z"/>
+    </svg>
+  </section>
+
+  <section class="section" id="menu">
+    <div class="container">
+      <h2>Меню</h2>
+      <p class="sub">Добавляйте блюда в заказ и смотрите, как работает корзина. Цены в сомах.</p>
+      <div class="tabs" role="group" aria-label="Разделы меню" id="tabs"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container stats">
+      <div class="stat"><strong data-to="12">0</strong><span>видов кофе</span></div>
+      <div class="stat"><strong data-to="8">0</strong><span>столов с розетками</span></div>
+      <div class="stat"><strong data-to="7">0</strong><span>дней в неделю</span></div>
+      <div class="stat"><strong data-to="15">0</strong><span>свежих десертов</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container split">
+      <div>
+        <h2>Небольшое место, где не хочется торопиться</h2>
+        <p>В зале восемь столов, у каждого есть розетка. Можно прийти с ноутбуком на целый день или встретиться с друзьями на час.</p>
+        <p>Хлеб, десерты и соусы готовим на своей кухне, а овощи, мясо и творог берём у местных фермеров.</p>
+        <ul class="hours" style="margin-top:26px">
+          <li><span>Завтраки</span><strong>8:00 – 12:00</strong></li>
+          <li><span>Обед</span><strong>12:00 – 16:00</strong></li>
+          <li><span>Ужин</span><strong>17:00 – 23:00</strong></li>
+        </ul>
+      </div>
+      <div class="art">
+        <svg viewBox="0 0 400 300" role="img" aria-label="Чашка кофе на фоне гор">
+          <circle cx="285" cy="95" r="42" style="fill:var(--butter)"/>
+          <path style="fill:var(--spruce3)" d="M0 220 L90 110 L150 180 L230 90 L330 200 L400 150 V300 H0Z"/>
+          <path style="fill:var(--spruce)" d="M0 260 L110 190 L190 240 L290 170 L400 250 V300 H0Z"/>
+          <ellipse cx="200" cy="262" rx="95" ry="14" style="fill:#0d2220;opacity:.25"/>
+          <path style="fill:#f4f7f5" d="M130 175 H270 V215 C270 245 245 262 200 262 C155 262 130 245 130 215Z"/>
+          <path d="M270 188 C300 186 304 226 268 230" style="fill:none;stroke:#f4f7f5;stroke-width:12;stroke-linecap:round"/>
+          <ellipse cx="200" cy="175" rx="70" ry="10" style="fill:#7a4b2e"/>
+          <path d="M175 150 C165 130 190 120 178 98 M205 150 C195 130 220 120 208 98 M232 150 C222 130 247 120 235 98" style="fill:none;stroke:#f4f7f5;stroke-width:5;stroke-linecap:round;opacity:.8"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="booking">
+    <div class="container two">
+      <div>
+        <h2>Забронировать стол</h2>
+        <p class="sub">Выберите дату, время и количество гостей. Мы подтвердим бронь по телефону.</p>
+        <form id="book" novalidate>
+          <label>Имя<input type="text" name="name" autocomplete="name" required></label>
+          <div class="row2">
+            <label>Дата<input type="date" name="date" required></label>
+            <label>Время
+              <select name="time">
+                <option>10:00</option><option>12:00</option><option>14:00</option><option>16:00</option><option selected>18:00</option><option>20:00</option><option>22:00</option>
+              </select>
+            </label>
+          </div>
+          <label>Гостей
+            <select name="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6+</option></select>
+          </label>
+          <button class="btn btn-dark" type="submit">Забронировать</button>
+          <p class="msg" id="book-msg" role="status"></p>
+          <p class="hint">Это демо: данные никуда не отправляются. В рабочем сайте форму связывают с Telegram или почтой.</p>
+        </form>
+      </div>
+      <div id="contacts">
+        <h2>Контакты</h2>
+        <p class="sub">Приходите без записи или звоните, если хотите заказать торт.</p>
+        <ul class="info">
+          <li><strong>Адрес</strong>ул. Примерная, 12, Бишкек</li>
+          <li><strong>Телефон</strong><a href="tel:+996000000000">+996 000 00-00-00</a></li>
+          <li><strong>Часы работы</strong>Ежедневно с 8:00 до 23:00</li>
+          <li><strong>Instagram</strong>@tihiy.pereval (пример)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="container">
+    <div class="cols">
+      <div><h3>Тихий перевал</h3><p>Кофейня в Бишкеке. Кофе, завтраки, горячее и десерты каждый день.</p></div>
+      <div><h3>Разделы</h3><ul><li><a href="#menu">Меню</a></li><li><a href="#about">О нас</a></li><li><a href="#booking">Бронь</a></li></ul></div>
+      <div><h3>Связь</h3><ul><li>ул. Примерная, 12, Бишкек</li><li>+996 000 00-00-00</li></ul></div>
+    </div>
+    <p class="demo">Демонстрационный сайт: название, адрес и телефон вымышленные. Страница сделана как пример работы.</p>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Ваш заказ" aria-hidden="true">
+  <header><h2>Ваш заказ</h2><button class="icon-btn" id="cart-close" aria-label="Закрыть">✕</button></header>
+  <div class="items" id="items"></div>
+  <div class="foot">
+    <div class="total"><span>Итого</span><span id="total">0 сом</span></div>
+    <button class="btn btn-dark" id="checkout">Оформить заказ</button>
+    <p class="msg" id="order-msg" role="status"></p>
+  </div>
+</aside>
+
+<script>
+const MENU=[
+ {id:1,cat:'coffee',e:'☕',name:'Эспрессо',desc:'Насыщенный, с плотной пенкой.',price:120},
+ {id:2,cat:'coffee',e:'☕',name:'Капучино',desc:'Эспрессо, молоко и густая пена.',price:180},
+ {id:3,cat:'coffee',e:'🥛',name:'Латте',desc:'Много молока, мягкий вкус.',price:190},
+ {id:4,cat:'coffee',e:'☕',name:'Флэт уайт',desc:'Двойной эспрессо с бархатным молоком.',price:200},
+ {id:5,cat:'breakfast',e:'🥞',name:'Сырники со сметаной',desc:'Домашний творог, ягодный соус.',price:260},
+ {id:6,cat:'breakfast',e:'🍳',name:'Омлет с овощами',desc:'Три яйца, помидоры, перец, зелень.',price:280},
+ {id:7,cat:'breakfast',e:'🥣',name:'Овсянка с ягодами',desc:'На молоке, с мёдом и орехами.',price:220},
+ {id:8,cat:'breakfast',e:'🥑',name:'Авокадо-тост',desc:'Зерновой хлеб, яйцо пашот, семена.',price:340},
+ {id:9,cat:'main',e:'🍜',name:'Лагман по-домашнему',desc:'Тянутая лапша, говядина, овощи.',price:320},
+ {id:10,cat:'main',e:'🍝',name:'Паста карбонара',desc:'Бекон, желток, пармезан.',price:380},
+ {id:11,cat:'main',e:'🍔',name:'Бургер «Перевал»',desc:'Говяжья котлета, чеддер, маринованный лук.',price:420},
+ {id:12,cat:'main',e:'🥗',name:'Салат цезарь',desc:'Курица, романо, сухарики, соус.',price:360},
+ {id:13,cat:'dessert',e:'🍯',name:'Медовик',desc:'Тонкие коржи, сметанный крем.',price:200},
+ {id:14,cat:'dessert',e:'🍰',name:'Чизкейк',desc:'Сливочный, на песочной основе.',price:240},
+ {id:15,cat:'dessert',e:'🍮',name:'Тирамису',desc:'Маскарпоне, савоярди, кофе.',price:260},
+ {id:16,cat:'dessert',e:'🥐',name:'Миндальный круассан',desc:'Выпекаем утром, подаём тёплым.',price:190}
+];
+const CATS=[['all','Всё меню'],['coffee','Кофе'],['breakfast','Завтраки'],['main','Горячее'],['dessert','Десерты']];
+const $=s=>document.querySelector(s);
+const fmt=n=>n.toLocaleString('ru-RU')+' сом';
+let filter='all', cart={};
+
+/* Меню */
+function renderTabs(){
+  $('#tabs').innerHTML=CATS.map(([k,l])=>`<button class="tab" data-k="${k}" aria-pressed="${k===filter}">${l}</button>`).join('');
+}
+function renderGrid(){
+  const list=MENU.filter(d=>filter==='all'||d.cat===filter);
+  $('#grid').innerHTML=list.map(d=>`
+    <article class="dish">
+      <span class="emoji" aria-hidden="true">${d.e}</span>
+      <h3>${d.name}</h3><p>${d.desc}</p>
+      <div class="bottom"><span class="price">${fmt(d.price)}</span><button class="add" data-id="${d.id}">Добавить</button></div>
+    </article>`).join('');
+}
+$('#tabs').addEventListener('click',e=>{
+  const b=e.target.closest('.tab'); if(!b) return;
+  filter=b.dataset.k; renderTabs(); renderGrid();
+});
+$('#grid').addEventListener('click',e=>{
+  const b=e.target.closest('.add'); if(!b) return;
+  const id=b.dataset.id; cart[id]=(cart[id]||0)+1; renderCart();
+  b.textContent='Добавлено ✓'; setTimeout(()=>b.textContent='Добавить',900);
+});
+
+/* Корзина */
+function renderCart(){
+  const ids=Object.keys(cart).filter(id=>cart[id]>0);
+  let total=0,count=0;
+  $('#items').innerHTML=ids.length?ids.map(id=>{
+    const d=MENU.find(x=>x.id==id), q=cart[id]; total+=d.price*q; count+=q;
+    return `<div class="item"><strong>${d.name}</strong><span class="price">${fmt(d.price*q)}</span>
+      <div class="qty"><button data-a="minus" data-id="${id}" aria-label="Меньше">−</button><span>${q}</span><button data-a="plus" data-id="${id}" aria-label="Больше">+</button></div></div>`;
+  }).join(''):'<p class="empty">Пока пусто. Добавьте что-нибудь из меню.</p>';
+  $('#total').textContent=fmt(total); $('#count').textContent=count;
+  $('#checkout').disabled=!ids.length;
+}
+$('#items').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-a]'); if(!b) return;
+  const id=b.dataset.id; cart[id]+=b.dataset.a==='plus'?1:-1;
+  if(cart[id]<=0) delete cart[id]; renderCart();
+});
+function drawer(open){
+  $('#drawer').classList.toggle('open',open); $('#overlay').classList.toggle('show',open);
+  $('#drawer').setAttribute('aria-hidden',String(!open));
+}
+$('#cart-open').onclick=()=>drawer(true);
+$('#cart-close').onclick=$('#overlay').onclick=()=>drawer(false);
+document.addEventListener('keydown',e=>{if(e.key==='Escape')drawer(false)});
+$('#checkout').onclick=()=>{
+  const m=$('#order-msg'); m.textContent='Это демо: заказ никуда не отправлен. В рабочем сайте здесь будет отправка в Telegram или на кухню.'; m.classList.add('show');
+};
+
+/* Бронь */
+const book=$('#book'); book.elements.date.min=new Date().toISOString().split('T')[0];
+book.addEventListener('submit',e=>{
+  e.preventDefault(); const f=book.elements, m=$('#book-msg');
+  if(!f.name.value.trim()||!f.date.value){m.textContent='Укажите имя и дату.';}
+  else{m.textContent=`Спасибо, ${f.name.value.trim()}! Стол на ${f.guests.value} чел., ${f.date.value} в ${f.time.value} (демо, бронь не отправлена).`; book.reset();}
+  m.classList.add('show');
+});
+
+/* Мобильное меню */
+$('#burger').onclick=()=>{
+  const o=$('#links').classList.toggle('open'); $('#burger').setAttribute('aria-expanded',String(o));
+};
+$('#links').addEventListener('click',e=>{if(e.target.closest('a')){$('#links').classList.remove('open');$('#burger').setAttribute('aria-expanded','false')}});
+
+/* Тема */
+function setTheme(t){document.documentElement.dataset.theme=t;$('#theme').textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(_){}}
+let saved=null; try{saved=localStorage.getItem('theme')}catch(_){}
+setTheme(saved||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+$('#theme').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
+
+/* Счётчики */
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting) return; io.unobserve(en.target);
+  const to=+en.target.dataset.to; let n=0; const step=Math.max(1,Math.round(to/30));
+  const t=setInterval(()=>{n=Math.min(to,n+step);en.target.textContent=n;if(n===to)clearInterval(t)},40);
+}),{threshold:.6});
+document.querySelectorAll('[data-to]').forEach(el=>io.observe(el));
+
+/* Подсветка текущего раздела */
+const secs=['menu','about','booking'].map(id=>document.getElementById(id));
+const so=new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting) document.querySelectorAll('.links a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id));
+}),{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(s=>s&&so.observe(s));
+
+renderTabs(); renderGrid(); renderCart();
+</script>
+</body>
+</html>
